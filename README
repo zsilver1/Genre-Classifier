@@ -1,0 +1,7 @@
+This repository contains scripts and data for machine learning project by Sindhuula Selvaraju and Zachary Silver.
+This repository contains 2 directories:
+    1. Data : Raw and parsed data files
+    2. Code : Scripts to parse and classify data and compute prediction accuracy
+
+Usage:
+    
