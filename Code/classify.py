@@ -2,7 +2,11 @@ import os
 import argparse
 import sys
 import pickle
+from collections import defaultdict
 
+import numpy as np
+
+from predictor import Predictor
 from dataTypes import ClassificationLabel, FeatureVector, Instance, Predictor
 
 def load_data(filename):
@@ -34,7 +38,9 @@ def get_args():
     parser = argparse.ArgumentParser(description="This is the main test harness for your algorithms.")
     parser.add_argument("--data", type=str, required=True, help="The parsed filename")
     parser.add_argument("--algorithm", type=str, help="The name of the algorithm for training.")
-    parser.add_argument("--train_percent", type = int, help = "Percentage of training data. The rest will automatically be used for testing", default=50)
+    parser.add_argument("--train-percent", type = int, help = "Percentage of training data. The rest will automatically be used for testing", default=50)
+    parser.add_argument("--iterations", type = int, help = "Number of training iterations", default=10)
+    parser.add_argument("--learning-rate", type = float, help = "Learning rate for the aalgorithm", default=1.0)
     args = parser.parse_args()
     check_args(args)
 
@@ -48,14 +54,16 @@ def check_args(args):
             raise Exception("data file specified by --data does not exist.")
 
 
-def train(instances, algorithm):
-    print "Training program"
-    return None
+def train(learning, iterations, instances, algorithm):
+    prediction = Predictor(defaultdict(float))
+    predictions = prediction.train(learning, iterations, instances, algorithm)
+    trained = Predictor(predictions)
+    return trained
 
 
-def write_predictions(predictor, instances, filename):
+def write_predictions(predictor, instances, predictions_file):
     try:
-        with open(filename+"_predict", 'w') as writer:
+        with open(predictions_file+"_predict", 'w') as writer:
             for instance in instances:
                 label = predictor.predict(instance)
                 writer.write(str(label))
@@ -74,7 +82,7 @@ def main():
         with open(args.data) as datafile:
             trainInstances = [next(datafile) for x in xrange(trainingRows)]
         # Train the model.
-        predictor = train(trainInstances, args.algorithm)
+        predictor = train(args.leraning_rate, args.iterations, trainInstances, args.algorithm)
         try:
             mfilename = filename + "_model"
             with open(mfilename, 'wb') as writer:
