@@ -1,0 +1,13 @@
+This repository contains scripts and data for machine learning project by Sindhuula Selvaraju and Zachary Silver.
+This repository contains 2 directories:
+    1. Data : Raw and parsed data files
+    2. Code : Scripts to parse and classify data and compute prediction accuracy
+
+Usage:
+    
+Points to note:
+    1. The preprocessing/parsing of our raw data involves removing frequently occuriing words and phrases and making sure keywords necessary for the classification get a higher weight
+    2. The feature vector is formd similar to the way it waas formed in our homeworks but instead of integer our features are strings
+    3. We're still using the model and predict files to keep track of possible points of failure.
+Thinking points:
+    1. Should we also consider synonyms of words example a summary in the training dataa for a horror novel may have thee word scared but a horror novel in the test data may have the word afraid. 
