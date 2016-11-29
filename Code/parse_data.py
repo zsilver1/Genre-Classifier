@@ -21,14 +21,14 @@ def parse(file_name, dest_file):
             elif line[5].startswith('{'):
                 genres = ast.literal_eval(line[5]).values()
                 summary = line[6]
-        outFile.write(title + '|')
-        string = ""
-        for g in genres:
-            if '\\' not in g:
-                genreSet.add(g)
-                string += g + ','
-        outFile.write(string[:-1])
-        outFile.write('|' + summary)
+            outFile.write(title + '|')
+            string = ""
+            for g in genres:
+                if '\\' not in g:
+                    genreSet.add(g)
+                    string += g + ','
+            outFile.write(string[:-1])
+            outFile.write('|' + summary)
         line = inFile.readline()
     inFile.close()
     outFile.close()
