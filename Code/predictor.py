@@ -1,9 +1,11 @@
 from collections import defaultdict
+from dataTypes import Predictor, ClassificationLabel
 
-from dataTypes import Predictor,ClassificationLabel
+
 class Predictor(Predictor):
-    def __init__(self,weight):
+    def __init__(self, weight):
         self.weight = weight
+
     def train(self, iterations, instances, algorithm):
         if algorithm == "perceptron":
             print "perceptron"
