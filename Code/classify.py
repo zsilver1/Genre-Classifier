@@ -9,6 +9,7 @@ import numpy as np
 from predictor import Predictor
 from dataTypes import ClassificationLabel, FeatureVector, Instance, Predictor
 
+
 def load_data(filename):
     instances = []
     with open(filename) as reader:
@@ -35,12 +36,13 @@ def load_data(filename):
 
 
 def get_args():
-    parser = argparse.ArgumentParser(description="This is the main test harness for your algorithms.")
+    parser = argparse.ArgumentParser(
+        description="This is the main test harness for your algorithms.")
     parser.add_argument("--data", type=str, required=True, help="The parsed filename")
     parser.add_argument("--algorithm", type=str, help="The name of the algorithm for training.")
-    parser.add_argument("--train-percent", type = int, help = "Percentage of training data. The rest will automatically be used for testing", default=50)
-    parser.add_argument("--iterations", type = int, help = "Number of training iterations", default=10)
-    parser.add_argument("--learning-rate", type = float, help = "Learning rate for the aalgorithm", default=1.0)
+    parser.add_argument("--train-percent", type=int, help="Percentage of training data. The rest will automatically be used for testing", default=50)
+    parser.add_argument("--iterations", type=int, help="Number of training iterations", default=10)
+    parser.add_argument("--learning-rate", type=float, help="Learning rate for the aalgorithm", default=1.0)
     args = parser.parse_args()
     check_args(args)
 
@@ -106,9 +108,9 @@ def main():
             raise Exception("Exception while loading pickle.")
         write_predictions(predictor, testInstances, filename)
 
-        #Check the accuracy:
+        # Check the accuracy:
         try:
-            with open(filename+"_predict",'rb') as reader:
+            with open(filename+"_predict", 'rb') as reader:
                 testLabels = pickle.load(reader)
         except IOError:
                 raise Exception("Exception while reading the prredictions file.")
@@ -121,8 +123,7 @@ def main():
             if instance._label == testLabels[num]:
                 correct +=1
             num += 1
-        print "Accuracy of predictins is :",correct/total," with ",correct,"labels out os total ",total,"labels"
+        print "Accuracy of predictins is :", correct/total, " with ", correct, "labels out os total ", total, "labels"
 
 if __name__ == "__main__":
     main()
-
