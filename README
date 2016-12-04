@@ -10,4 +10,11 @@ Points to note:
     2. The feature vector is formd similar to the way it waas formed in our homeworks but instead of integer our features are strings
     3. We're still using the model and predict files to keep track of possible points of failure.
 Thinking points:
-    1. Should we also consider synonyms of words example a summary in the training dataa for a horror novel may have thee word scared but a horror novel in the test data may have the word afraid. 
+    1. Should we also consider synonyms of words for example:
+        The corpse frightened her
+        The body scared her
+       Corpse and body mean the same and scared and frightened mean the same hence we should see if any word in test has a synonym in train then it should get the same weight as the word in train
+    2. We might alo want to use a stemmer and a lemmatizer this is because we should use the root word instead of the word itself for example frighten, frightening and frightened all have the root word as fright.
+        NLTK package for python has functionalities that support this. We can ask Mark to use this.
+    3. The parsed data should not only split the data it shuold also remove unimportant words, assign weights(taking into consideration points 1 and 2) etc.
+    4. A list of sub-genres needs too be made so that the perceptron can interleave over this.
