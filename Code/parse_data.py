@@ -22,15 +22,14 @@ def filter_words(summary, words_file):
     ignoredWordsFile.close()
 
     summary_tokens = tokenizer.tokenize(summary)
-    for token in summary_tokens:
-        if token in ignored:
-            print token
+    for i, token in enumerate(summary_tokens):
+        try:
+            summary_tokens[i] = lemmatizer.lemmatize(
+                token.decode('utf-8')).encode('ascii', 'ignore')
+        except UnicodeDecodeError:
             summary_tokens.remove(token)
-        else:
-            try:
-                token = lemmatizer.lemmatize(token.decode('utf-8'))
-            except UnicodeDecodeError:
-                summary_tokens.remove(token)
+    for item in ignored:
+        summary_tokens = filter(lambda a: a != item, summary_tokens)
     return ' '.join(summary_tokens)
 
 
@@ -79,7 +78,8 @@ def main():
     output_file = args[2]
     words_file = args[3]
     genreSet = parse(input_file, output_file, words_file)
-    print genreSet
+    for g in genreSet:
+        print g
 
 if __name__ == "__main__":
     main()
