@@ -1,11 +1,43 @@
 import sys
 import re
 import ast
+from nltk.tokenize import RegexpTokenizer
+from nltk.stem import WordNetLemmatizer
 
 
-def parse(file_name, dest_file):
+def filter_words(summary, words_file):
+    ignoredWordsFile = open(words_file, 'r')
+    ignored = []
+    lemmatizer = WordNetLemmatizer()
+    tokenizer = RegexpTokenizer(r'\w+')
+
+    summary = summary.lower()
+
+    # read all ignored words into list
+    word = ignoredWordsFile.readline()
+    while word != "":
+        word = word.strip()
+        ignored.append(word)
+        word = ignoredWordsFile.readline()
+    ignoredWordsFile.close()
+
+    summary_tokens = tokenizer.tokenize(summary)
+    for token in summary_tokens:
+        if token in ignored:
+            print token
+            summary_tokens.remove(token)
+        else:
+            try:
+                token = lemmatizer.lemmatize(token.decode('utf-8'))
+            except UnicodeDecodeError:
+                summary_tokens.remove(token)
+    return ' '.join(summary_tokens)
+
+
+def parse(file_name, dest_file, words_file):
     inFile = open(file_name, 'r')
     outFile = open(dest_file, 'w')
+
     line = inFile.readline()
     genreSet = set()
     while line != "":
@@ -22,13 +54,16 @@ def parse(file_name, dest_file):
                 genres = ast.literal_eval(line[5]).values()
                 summary = line[6]
             outFile.write(title + '|')
-            string = ""
+            curString = ""
             for g in genres:
                 if '\\' not in g:
                     genreSet.add(g)
-                    string += g + ','
-            outFile.write(string[:-1])
-            outFile.write('|' + summary)
+                    curString += g + ','
+            outFile.write(curString[:-1])
+
+            # filter words from summary
+            summary = filter_words(summary, words_file)
+            outFile.write('|' + summary + '\n')
         line = inFile.readline()
     inFile.close()
     outFile.close()
@@ -37,12 +72,13 @@ def parse(file_name, dest_file):
 
 def main():
     args = sys.argv
-    if len(args) != 3:
+    if len(args) != 4:
         print("Error: wrong number of arguments")
         return 1
     input_file = args[1]
     output_file = args[2]
-    genreSet = parse(input_file, output_file)
+    words_file = args[3]
+    genreSet = parse(input_file, output_file, words_file)
     print genreSet
 
 if __name__ == "__main__":
