@@ -7,7 +7,7 @@ from collections import defaultdict
 import numpy as np
 
 from predictor import Predictor
-from dataTypes import ClassificationLabel, FeatureVector, Instance, Predictor
+from dataTypes import ClassificationLabel, FeatureVector, Instance, Predictor, Title
 
 
 def load_data(filename):
@@ -16,13 +16,18 @@ def load_data(filename):
         for line in reader:
             if len(line.strip()) == 0:
                 continue
-            # Divide the line into features and label.
+            # Divide the line into title, features and label.
             # Features are in the form word : count
-            split_line = line.split(" ")
-            label_string = split_line[0]
-            label = ClassificationLabel(label_string)
+            split_line = line.split("|")
+            title_string = split_line[0]
+            title = Title()
+            title.add(title_string)
+            labels = split_line[1]
+            label = ClassificationLabel()
+            for lab in labels.split(","):
+                label.append(lab)
             feature_vector = FeatureVector()
-            for item in split_line[1:]:
+            for item in split_line[2:]:
                     index = item.split(":")[0]
                     try:
                         value = float(item.split(":")[1])
@@ -30,8 +35,9 @@ def load_data(filename):
                         raise ValueError("Unable to convert value " + item.split(":")[1] + " to float.")
                     if value != 0.0:
                         feature_vector.add(index, value)
-            instance = Instance(feature_vector, label)
+            instance = Instance(feature_vector, label, title)
             instances.append(instance)
+    print instances
     return instances
 
 
@@ -123,7 +129,7 @@ def main():
             if instance._label == testLabels[num]:
                 correct +=1
             num += 1
-        print "Accuracy of predictins is :", correct/total, " with ", correct, "labels out os total ", total, "labels"
+        print "Accuracy of predictions is :", correct/total, " with ", correct, "labels out os total ", total, "labels"
 
 if __name__ == "__main__":
     main()
