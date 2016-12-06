@@ -5,31 +5,37 @@ from abc import ABCMeta, abstractmethod
 
 class ClassificationLabel:
     def __init__(self, label):
-        self.label = []
-        pass
+        self.label = label
 
-    def add(self, index, value):
-        self.label[index] = value
-        pass
-
-    def append(self, value):
-        self.label.append(value)
-
-    def get(self, index):
-        return self.label[index]
+    def __str__(self):
+        return str(self.label)
 
 
 class FeatureVector:
     def __init__(self):
         self.feature_vector = {}
-        pass
 
     def add(self, index, value):
         self.feature_vector[index] = value
-        pass
 
     def get(self, index):
-        return self.feature_vector[index]
+        if index in self.feature_vector:
+            return self.feature_vector[index]
+        else:
+            return 0
+
+    def modify(self, index, addedValue):
+        if index in self.feature_vector:
+            self.feature_vector[index] += addedValue
+        else:
+            raise KeyError("Index not in vector")
+
+    def dot(self, other):
+        total = 0
+        for i in self.feature_vector:
+            total += self.feature_vector[i] * other.feature_vector[i]
+        return total
+
 
 class Title:
     def __init__(self):
@@ -60,5 +66,3 @@ class Predictor:
 
     @abstractmethod
     def predict(self, instance): pass
-
-

@@ -38,7 +38,7 @@ def parse(file_name, dest_file, words_file):
     outFile = open(dest_file, 'w')
 
     line = inFile.readline()
-    genreSet = set()
+    genreDict = {}
     while line != "":
         line = re.split(r'\t+', line)
         if len(line) > 5:
@@ -56,7 +56,10 @@ def parse(file_name, dest_file, words_file):
             curString = ""
             for g in genres:
                 if '\\' not in g:
-                    genreSet.add(g)
+                    if g in genreDict:
+                        genreDict[g] += 1
+                    else:
+                        genreDict[g] = 1
                     curString += g + ','
             outFile.write(curString[:-1])
 
@@ -66,7 +69,7 @@ def parse(file_name, dest_file, words_file):
         line = inFile.readline()
     inFile.close()
     outFile.close()
-    return genreSet
+    return genreDict
 
 
 def main():
