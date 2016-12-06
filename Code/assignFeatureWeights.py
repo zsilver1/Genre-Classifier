@@ -15,9 +15,9 @@ def main():
     input_file = args[1]
     createFeatures(input_file)
 def createFeatures(filename):
-    features = []
+    features = {}
     titles = []
-    genres = []
+    genres = {}
     featureWeights = {}
     with open(filename) as reader:
         for line in reader:
@@ -25,19 +25,28 @@ def createFeatures(filename):
                 continue
             lineComponents = line.split("|")
             titles.append(lineComponents[0])
-            genres.append(lineComponents[1])
-            features.append(lineComponents[2])
+            genres[lineComponents[0]]=lineComponents[1]
+            summary = lineComponents[2]
+            wordList = []
+            for word in summary.rstrip("\n").split(" "):
+                wordList.append(word)
+            features[lineComponents[0]] = wordList
     stemmer = PorterStemmer()
     lemmatizer = WordNetLemmatizer()
     for list in features:
-        list = unicode(list, errors='ignore')
-        for word in list.split(" "):
-          words = lemmatizer.lemmatize(word)
-          words = stemmer.stem(words)
-          if words not in featureWeights:
-                featureWeights[words] = 1
+        tempList = []
+        for word in features[list]:
+          word = unicode(word, errors='ignore')
+          word = lemmatizer.lemmatize(word)
+          word = stemmer.stem(word)
+          tempList.append(word)
+          if word not in featureWeights:
+                featureWeights[word] = 1
           else:
-                featureWeights[words] +=1
+                featureWeights[word] +=1
+        features[list] = tempList
+    #Need to fix synonym weights.
+    '''
     print "here"
     for word in featureWeights:
         print "in"
@@ -45,6 +54,13 @@ def createFeatures(filename):
         unicodedata.normalize('NFKD', word).encode('ascii', 'ignore')
         for ss in wordnet.synsets(str(word)):
             print(word, ss.name(), ss.lemma_names())
-        break
+    '''
+    writer =  open(filename+"feature", "w")
+    for title in titles:
+            tempVector = ""
+            for feature in features[title]:
+                tempVector += feature +":"+ str(featureWeights[feature])
+            writer.write(title+"|"+genres[title]+"|"+tempVector)
+
 if __name__ == "__main__":
     main()
