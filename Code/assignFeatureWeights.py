@@ -60,7 +60,7 @@ def createFeatures(filename):
             tempVector = ""
             for feature in features[title]:
                 tempVector += feature +":"+ str(featureWeights[feature]) +" "
-            writer.write(title+"|"+genres[title]+"|"+tempVector)
+            writer.write(title+"|"+genres[title]+"|"+tempVector+"\n")
 
 if __name__ == "__main__":
     main()
