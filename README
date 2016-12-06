@@ -14,9 +14,15 @@ Thinking points:
         The corpse frightened her
         The body scared her
        Corpse and body mean the same and scared and frightened mean the same hence we should see if any word in test has a synonym in train then it should get the same weight as the word in train
-    2. We might alo want to use a stemmer and a lemmatizer this is because we should use the root word instead of the word itself for example frighten, frightening and frightened all have the root word as fright.
-        NLTK package for python has functionalities that support this. We can ask Mark to use this.
-    3. The parsed data should not only split the data it shuold also remove unimportant words, assign weights(taking into consideration points 1 and 2) etc.
+    2. We might alo want to use a stemmer and a lemmatizer this is because we should use the root word instead of the word itself for example frighten, frightening and frightened all have the root word as fright. (done)
+    3. The parsed data should not only split the data it shuold also remove unimportant words, assign weights(taking into consideration points 1 and 2) etc. (done)
     4. A list of sub-genres needs too be made so that the perceptron can interleave over this.
 
-    5. Ho do we map synonyms??
+    5. Our neural network uses some number of stacked "perceptrons." Each
+    perceptron represents its input as a vector and its output as a number.
+    Depending on the number of nodes in our hidden layers, we will create
+    multiple perceptrons. For example, if we have 10 nodes in a hidden layer,
+    each of those nodes will be the output of 10 perceptrons that represent
+    the previous layers. These outputs will then be the inputs for a final
+    perceptron that gives the final output value.
+    Very informative link: http://stackoverflow.com/questions/34229140/choosing-from-different-cost-function-and-activation-function-of-a-neural-networ
