@@ -48,6 +48,7 @@ def createFeatures(filename):
     tf = {}
     idf = defaultdict(int)
     tf_idf = {}
+    numdocs = len(titles)
     for list in features:
         temptf = {}
         tempList = []
@@ -73,6 +74,8 @@ def createFeatures(filename):
         for word in temptf:
             temptf[word] = float(temptf[word])/float(length)
         tf[list] = temptf
+    for word in idf:
+        idf[word] = numdocs/idf[word]
     for list in features:
         tmp = defaultdict(float)
         for word in features[list]:
@@ -80,6 +83,15 @@ def createFeatures(filename):
         tf_idf[list] = tmp
     #Need to fix synonym weights.
     writer =  open(filename+"feature", "w")
+    #for word1 in idf:
+     #   for word2 in idf:
+      #      if check_synonym(word1,word2):
+       #         for title in titles:
+        #            if word1 in features[title] & word2 in features[title]:
+         #               if tf_idf[title][word1]>tf_idf[title][word2]:
+          #                  tf_idf[title][word2] = tf_idf[title][word1]
+        #             else:
+         #                   tf_idf[title][word1] = tf_idf[title][word2]
     for title in titles:
             tempVector = ""
             for feature in features[title]:
