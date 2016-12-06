@@ -18,3 +18,5 @@ Thinking points:
         NLTK package for python has functionalities that support this. We can ask Mark to use this.
     3. The parsed data should not only split the data it shuold also remove unimportant words, assign weights(taking into consideration points 1 and 2) etc.
     4. A list of sub-genres needs too be made so that the perceptron can interleave over this.
+
+    5. Ho do we map synonyms??
