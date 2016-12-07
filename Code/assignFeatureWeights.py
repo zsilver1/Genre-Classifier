@@ -109,13 +109,14 @@ def createFeatures(infile, outfile, genrelist):
     writer =  open(outfile, "w")
     for title in titles:
             genresVector = ""
+            max = 0
             for genre in genres[title]:
                 try:
-                    if (genre in genreList) & (genreList[genre] > 100):
-                        genresVector += genre + ","
+                  if (genreList[genre] > max) & (genre != "Fiction"):
+                        genresVector = genre
                 except:
                     continue
-            genresVector = genresVector[:-1]
+#            genresVector = genresVector[:-1]
             tempVector = ""
             for feature in features[title]:
                 tempVector += feature +":"+ str(tf_idf[title][feature]) +" "
