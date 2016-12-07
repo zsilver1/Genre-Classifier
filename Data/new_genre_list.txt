@@ -1,0 +1,224 @@
+Fiction:5003
+Speculative fiction:4536
+Science Fiction:2968
+Novel:2655
+Fantasy:2553
+Children's literature:2188
+Mystery:1446
+Young adult literature:867
+Suspense:800
+Crime Fiction:788
+Historical novel:715
+Thriller:587
+Horror:528
+Romance novel:448
+Historical fiction:405
+Detective fiction:359
+Adventure novel:348
+Non-fiction:251
+Alternate history:231
+Spy fiction:202
+Comedy:149
+Dystopia:135
+Satire:132
+Autobiography:126
+Gothic fiction:115
+Biography:108
+Comic novel:101
+Novella:93
+War novel:90
+Short story:85
+Autobiographical novel:82
+History:81
+High fantasy:73
+Memoir:70
+Utopian and dystopian fiction:69
+Humour:68
+Apocalyptic and post-apocalyptic fiction:62
+Techno-thriller:58
+Steampunk:51
+Paranormal romance:50
+Philosophy:47
+Urban fantasy:45
+Picture book:45
+Bildungsroman:43
+Black comedy:42
+Gamebook:41
+Western:40
+Reference:40
+Literary fiction:37
+Epistolary novel:36
+Sociology:35
+Military science fiction:35
+Role-playing game:34
+Sword and sorcery:31
+Psychological novel:31
+Whodunit:30
+Poetry:30
+Drama:30
+Absurdist fiction:30
+Magic realism:27
+Dark fantasy:27
+Hardboiled:26
+Travel:25
+Hard science fiction:25
+Western fiction:23
+Science:23
+Psychology:21
+Adventure:21
+True crime:20
+Time travel:20
+Vampire fiction:19
+Parallel novel:19
+Religion:18
+Picaresque novel:18
+Lost World:18
+Erotica:18
+Wuxia:17
+Historical fantasy:17
+Cyberpunk:17
+Politics:16
+Graphic novel:16
+Scientific romance:15
+Parody:15
+Business:15
+Economics:14
+Mathematics:13
+Comic book:13
+Chivalric romance:13
+Travel literature:12
+Space opera:12
+Science fantasy:11
+Nature:11
+Music:11
+Cozy:11
+Chick lit:11
+Biographical novel:11
+Tragicomedy:10
+Regency romance:10
+Inspirational:10
+Existentialism:10
+Fairy tale:9
+Comic science fiction:9
+Postmodernism:8
+Popular science:8
+Play:8
+Personal journal:8
+Literary realism:8
+Historical whodunnit:8
+Zombie:7
+Urban fiction:7
+Transhumanism:7
+Post-holocaust:7
+Gay novel:7
+Feminist science fiction:7
+Comics:7
+Subterranean fiction:6
+Sports:6
+Self-help:6
+Mashup:6
+Fantasy of manners:6
+Essay:6
+Contemporary fantasy:6
+Comic fantasy:6
+Campus novel:6
+Anthology:6
+Zombies in popular culture:5
+Treatise:5
+Soft science fiction:5
+Social science fiction:5
+Planetary romance:5
+Locked room mystery:5
+Industrial novel:5
+Historical romance:5
+Farce:5
+Anthropology:5
+Supernatural:4
+Spirituality:4
+Social novel:4
+Sea story:4
+New York Times Best Seller list:4
+Invasion literature:4
+Heroic fantasy:4
+Ghost story:4
+Ergodic literature:4
+Epic Science Fiction and Fantasy:4
+Encyclopedia:4
+Edisonade:4
+Creative nonfiction:4
+Conspiracy fiction:4
+Coming of age:4
+Catastrophic literature:4
+Social sciences:3
+Social commentary:3
+Serial:3
+Prose:3
+Political philosophy:3
+Polemic:3
+Photography:3
+Non-fiction novel:3
+Dying Earth subgenre:3
+Cookbook:3
+Biopunk:3
+Albino bias:3
+Transgender and transsexual fiction:2
+Sword and planet:2
+Romantic comedy:2
+Prose poetry:2
+Postcyberpunk:2
+Naval adventure:2
+Morality play:2
+Modernism:2
+Military history:2
+Literary criticism:2
+Light novel:2
+LGBT literature:2
+Juvenile fantasy:2
+Foreign legion:2
+Fictional crossover:2
+Fairytale fantasy:2
+Comedy of manners:2
+Youth:1
+Utopian fiction:1
+Superhero fiction:1
+Space western:1
+Social criticism:1
+School story:1
+Robinsonade:1
+Religious text:1
+Pornography:1
+Popular culture:1
+Police procedural:1
+Pastiche:1
+New Weird:1
+Neuroscience:1
+Metaphysics:1
+Medieval romance:1
+Marketing:1
+Low fantasy:1
+Literary theory:1
+Indian chick lit:1
+Human extinction:1
+Georgian romance:1
+Gay Themed:1
+Future history:1
+First-person narrative:1
+Fantastique:1
+Fable:1
+Experimental literature:1
+English public-school stories:1
+Elizabethan romance:1
+Education:1
+Conspiracy:1
+Computer Science:1
+Colonial United States romance:1
+Collage:1
+Cabal:1
+Boys' school stories:1
+Bit Lit:1
+Bangsian fantasy:1
+Autobiographical comics:1
+Anti-war:1
+Anti-nuclear:1
+American Gothic Fiction:1
+Alien invasion:1
