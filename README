@@ -27,3 +27,7 @@ Thinking points:
     the previous layers. These outputs will then be the inputs for a final
     perceptron that gives the final output value.
     Very informative link: http://stackoverflow.com/questions/34229140/choosing-from-different-cost-function-and-activation-function-of-a-neural-networ
+
+
+
+    python "C:\Users\Sindhuula\Desktop\MS\Sem 4\ML\Project\ML-Project\Code\parse_data.py" "C:\Users\Sindhuula\Desktop\MS\Sem 4\ML\Project\ML-Project\Data\parsed_data.txt" "C:\Users\Sindhuula\Desktop\MS\Sem 4\ML\Project\ML-Project\Data\weighted_parsed_data.txt" "C:\Users\Sindhuula\Desktop\MS\Sem 4\ML\Project\ML-Project\Data\new_genre_list.txt"
