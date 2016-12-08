@@ -24,8 +24,7 @@ def load_data(filename):
             title.add(title_string)
             labels = split_line[1]
             label = ClassificationLabel()
-            for lab in labels.split(","):
-                label.append(lab)
+            label.add(labels)
             feature_vector = FeatureVector()
             for item in split_line[2:]:
                     index = item.split(":")[0]
