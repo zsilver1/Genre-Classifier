@@ -85,7 +85,7 @@ class NeuralNetwork:
     def forwardPropagate(self, instance):
         # instance is tuple, see above
         x = instance[0]
-        print x.dataDict
+        print x.feature_vector
         for layer in xrange(self.numHiddenLayers):
             l = FeatureVector()
             for node in xrange(self.numHiddenNodes):
