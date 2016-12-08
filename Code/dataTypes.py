@@ -4,8 +4,10 @@ from abc import ABCMeta, abstractmethod
 # abstract base class for defining labels
 
 class ClassificationLabel:
-    def __init__(self, label):
-        self.label = label
+    def __init__(self, genre):
+        # ASSUMING 10 GENRES
+        self.label = [0 for i in xrange(0, 10)]
+        self.label[genre] = 1
 
     def __str__(self):
         return str(self.label)
@@ -33,7 +35,7 @@ class FeatureVector:
     def dot(self, other):
         total = 0
         for i in self.feature_vector:
-            total += self.feature_vector[i] * other.feature_vector[i]
+            total += self.get(i) * other.get(i)
         return total
 
 
