@@ -114,6 +114,7 @@ def createFeatures(infile, outfile, genrelist):
                 try:
                   if (genreList[genre] > max) & (genre != "Fiction"):
                         genresVector = genre
+                        max = genreList[genre]
                 except:
                     continue
 #            genresVector = genresVector[:-1]
