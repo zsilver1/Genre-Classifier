@@ -117,9 +117,12 @@ def createFeatures(infile, outfile):#, genrelist):
                 if g in GENRE_LIST:
                     genre = g
                     break
+            temp = []
             tempVector = ""
             for feature in features[title]:
-                if feature not in deleteList:
+                if feature not in temp:
+                 temp.append(feature)
+                 if feature not in deleteList:
                   tempVector += feature + ":" + str(tf_idf[title][feature]) + " "
             writer.write(title+"|"+genre+"|"+tempVector+"\n")
     writer.close()
