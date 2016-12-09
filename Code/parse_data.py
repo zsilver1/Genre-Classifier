@@ -1,7 +1,6 @@
 import sys
 import re
 import ast
-from operator import itemgetter
 
 from nltk.tokenize import RegexpTokenizer
 from nltk.stem import WordNetLemmatizer
@@ -36,6 +35,10 @@ def filter_words(summary, words_file):
 
 
 def parse(file_name, dest_file, words_file):
+    GENRE_LIST = ["Fiction", "Speculative fiction", "Science Fiction",
+                  "Fantasy", "Children's literature", "Mystery",
+                  "Suspense", "Crime Fiction", "Historical novel",
+                  "Horror", "Romance novel", "Non-fiction"]
     inFile = open(file_name, 'r')
     outFile = open(dest_file, 'w')
 
@@ -57,13 +60,10 @@ def parse(file_name, dest_file, words_file):
             outFile.write(title + '|')
             curString = ""
             for g in genres:
-                if '\\' not in g:
-                    if g in genreDict:
-                        genreDict[g] += 1
-                    else:
-                        genreDict[g] = 1
-                    curString += g + ','
-            outFile.write(curString[:-1])
+                if g in GENRE_LIST:
+                    curString = g
+                    break
+            outFile.write(curString)
 
             # filter words from summary
             summary = filter_words(summary, words_file)
@@ -76,17 +76,13 @@ def parse(file_name, dest_file, words_file):
 
 def main():
     args = sys.argv
-    if len(args) != 5:
+    if len(args) != 4:
         print("Error: wrong number of arguments")
         return 1
     input_file = args[1]
     output_file = args[2]
     words_file = args[3]
-    genre_file = args[4]
     genreSet = parse(input_file, output_file, words_file)
-    with open(genre_file,"w") as writer:
-        for key, value in sorted(genreSet.iteritems(), key=lambda (k, v): (v, k), reverse=True):
-            writer.write(str(key)+":"+str(value)+"\n")
-    writer.close()
+    print genreSet
 if __name__ == "__main__":
     main()
