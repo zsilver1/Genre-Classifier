@@ -12,13 +12,13 @@ sys.setdefaultencoding('utf8')
 
 def main():
     args = sys.argv
-    if len(args) != 3:
+    if len(args) != 4:
         print("Error: wrong number of arguments")
         return 1
     input_file = args[1]
-#    genre_list = args[3]
+    words_list = args[3]
     output_file = args[2]
-    createFeatures(input_file, output_file)#, genre_list)
+    createFeatures(input_file, output_file, words_list)
 
 
 def check_synonym(word, word2):
@@ -33,7 +33,7 @@ def check_synonym(word, word2):
     return False
 
 
-def createFeatures(infile, outfile):#, genrelist):
+def createFeatures(infile, outfile, wordfile):
     features = {}
     titles = []
     genres = {}
@@ -106,6 +106,10 @@ def createFeatures(infile, outfile):#, genrelist):
         for word in features[list]:
             tmp[word] = tf[list][word] * idf[word]
         tf_idf[list] = tmp
+    with open(wordfile,"w") as writer:
+     for word in dontDeleteList:
+        writer.write(word+"\n")
+    writer.close()
     writer = open(outfile, "w")
     for title in titles:
             genre = ""
@@ -118,9 +122,13 @@ def createFeatures(infile, outfile):#, genrelist):
                     genre = g
                     break
             tempVector = ""
+            tempList = []
             for feature in features[title]:
-                if feature in dontDeleteList:
+                if feature not in tempList:
+                 tempList.append(feature)
+                 if feature in dontDeleteList:
                   tempVector += feature + ":" + str(tf_idf[title][feature]) + " "
+
             writer.write(title+"|"+genre+"|"+tempVector+"\n")
     writer.close()
 if __name__ == "__main__":
