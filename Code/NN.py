@@ -102,10 +102,10 @@ class Node:
         self.delta = self.output * (1 - self.output) * error
 
     def updateParams(self, learningRate, prevLayer):
-        self.bias = self.bias * learningRate * self.delta
+        self.bias = self.bias + (learningRate * self.delta)
         for i, node in enumerate(prevLayer):
-            self.weights[i] = (self.weights[i] + learningRate *
-                               node.output * self.delta)
+            self.weights[i] = (self.weights[i] + (learningRate *
+                               node.output * self.delta))
 
     def __str__(self):
         return "Node(out=" + str(self.output) + ",lr=" + str(self.layer) + ")"
