@@ -1,6 +1,10 @@
+from operator import itemgetter
+
 from nltk import PorterStemmer, WordNetLemmatizer, defaultdict
+from nltk.compat import iteritems
 from nltk.corpus import wordnet
 import sys
+
 
 reload(sys)
 sys.setdefaultencoding('utf8')
@@ -8,13 +12,13 @@ sys.setdefaultencoding('utf8')
 
 def main():
     args = sys.argv
-    if len(args) != 4:
+    if len(args) != 3:
         print("Error: wrong number of arguments")
         return 1
     input_file = args[1]
-    genre_list = args[3]
+#    genre_list = args[3]
     output_file = args[2]
-    createFeatures(input_file, output_file, genre_list)
+    createFeatures(input_file, output_file)#, genre_list)
 
 
 def check_synonym(word, word2):
@@ -29,19 +33,12 @@ def check_synonym(word, word2):
     return False
 
 
-def createFeatures(infile, outfile, genrelist):
+def createFeatures(infile, outfile):#, genrelist):
     features = {}
     titles = []
     genres = {}
     featureWeights = {}
     genreList = {}
-    with open(genrelist) as reader:
-        for line in reader:
-            if len(line.strip()) == 0:
-                continue
-            lineComponents = line.split(":")
-            genreList[lineComponents[0]] = lineComponents[1]
-    reader.close()
     with open(infile) as reader:
         for line in reader:
             if len(line.strip()) == 0:
@@ -58,6 +55,14 @@ def createFeatures(infile, outfile, genrelist):
                 wordList.append(word)
             features[lineComponents[0]] = wordList
     reader.close()
+    '''
+        with open(genrelist) as reader:
+            for line in reader:
+                if len(line.strip()) == 0:
+                    continue
+                lineComponents = line.split(":")
+                genreList[lineComponents[0]] = lineComponents[1]
+        reader.close()'''
 
     stemmer = PorterStemmer()
     lemmatizer = WordNetLemmatizer()
@@ -71,12 +76,12 @@ def createFeatures(infile, outfile, genrelist):
         wordlist = []
         length = len(features[list])
         for word in features[list]:
-            word = unicode(word, errors='ignore')
-            word = lemmatizer.lemmatize(word)
-            word = stemmer.stem(word)
+            words = unicode(word, errors='ignore')
+            words = lemmatizer.lemmatize(words)
+            words = stemmer.stem(words)
             tempList.append(word)
-            if word not in wordlist:
-                wordlist.append(word)
+            if words not in wordlist:
+                wordlist.append(words)
                 idf[word] += 1
             if word not in temptf:
                 temptf[word] = 1
@@ -90,24 +95,17 @@ def createFeatures(infile, outfile, genrelist):
         for word in temptf:
             temptf[word] = float(temptf[word])/float(length)
         tf[list] = temptf
-    for word in idf:
-        idf[word] = numdocs/idf[word]
+    deleteList = []
+    for key, value in sorted(idf.iteritems(), key=lambda (k, v): (v, k), reverse= True):
+        #print key, value
+        if value < 100:
+            deleteList.append(key)
+        idf[key] = numdocs/idf[key]
     for list in features:
         tmp = defaultdict(float)
         for word in features[list]:
             tmp[word] = tf[list][word] * idf[word]
         tf_idf[list] = tmp
-    # Need to fix synonym weights.
-    # for word1 in idf:
-    #    for word2 in idf:
-    #        if check_synonym(word1,word2):
-    #            for title in titles:
-    #                if word1 in features[title] & word2 in features[title]:
-    #                    if tf_idf[title][word1]>tf_idf[title][word2]:
-    #                        tf_idf[title][word2] = tf_idf[title][word1]
-    #                 else:
-    #                        tf_idf[title][word1] = tf_idf[title][word2]
-
     writer = open(outfile, "w")
     for title in titles:
             genre = ""
@@ -119,10 +117,10 @@ def createFeatures(infile, outfile, genrelist):
                 if g in GENRE_LIST:
                     genre = g
                     break
-#            genresVector = genresVector[:-1]
             tempVector = ""
             for feature in features[title]:
-                tempVector += feature + ":" + str(tf_idf[title][feature]) + " "
+                if feature not in deleteList:
+                  tempVector += feature + ":" + str(tf_idf[title][feature]) + " "
             writer.write(title+"|"+genre+"|"+tempVector+"\n")
     writer.close()
 if __name__ == "__main__":
