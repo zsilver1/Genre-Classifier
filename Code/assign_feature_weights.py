@@ -95,11 +95,11 @@ def createFeatures(infile, outfile):#, genrelist):
         for word in temptf:
             temptf[word] = float(temptf[word])/float(length)
         tf[list] = temptf
-    deleteList = []
+    dontDeleteList = []
     for key, value in sorted(idf.iteritems(), key=lambda (k, v): (v, k), reverse= True):
         #print key, value
-        if value < 100:
-            deleteList.append(key)
+        if value > 100:
+            dontDeleteList.append(key)
         idf[key] = numdocs/idf[key]
     for list in features:
         tmp = defaultdict(float)
@@ -119,7 +119,7 @@ def createFeatures(infile, outfile):#, genrelist):
                     break
             tempVector = ""
             for feature in features[title]:
-                 if feature not in deleteList:
+                if feature in dontDeleteList:
                   tempVector += feature + ":" + str(tf_idf[title][feature]) + " "
             writer.write(title+"|"+genre+"|"+tempVector+"\n")
     writer.close()
