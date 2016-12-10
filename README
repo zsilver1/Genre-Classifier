@@ -4,8 +4,8 @@ This repository contains 2 directories:
     2. Code : Scripts to parse and classify data and compute prediction accuracy
 
 Usage:
-    parse_data.py : python parse_data.py <input_file> <output_file> <stopword_file> <genrelist_file>
-    assign_feature_weights.py : python assign_feature_weights.py <input_file> <output_file> <genrelist_file>    
+    parse_data.py : python parse_data.py <input_file> <output_file> <stopword_file>
+    assign_feature_weights.py : python assign_feature_weights.py <input_file> <output_file> <words_file>    
 Points to note:
     1. The preprocessing/parsing of our raw data involves removing frequently occuriing words and phrases and making sure keywords necessary for the classification get a higher weight
     2. The feature vector is formd similar to the way it waas formed in our homeworks but instead of integer our features are strings
