@@ -1,22 +1,24 @@
 import math
+import random
 
 
 class NeuralNetwork:
-    def __init__(self, data,  numInputNodes, numHiddenNodes, numOutputNodes=12,
-                 learningRate=0.5, numHiddenLayers=0):
+    def __init__(self, numInputNodes, numHiddenNodes, numOutputNodes=12,
+                 learningRate=0.5, numHiddenLayers=0, randomWeights=False):
 
         # list of (np vectors, label (as tuple))
-        self.data = data
         self.numInputNodes = numInputNodes
         self.numHiddenLayers = numHiddenLayers
         self.numOutputNodes = numOutputNodes
         self.learningRate = learningRate
+        self.randomWeights = randomWeights
 
         self.numHiddenNodes = numHiddenNodes
 
         # self.network[l][j] where l is layer and j is jth node of layer
         self.network = []
         self.populateNetwork()
+        self.setFirstLayerWeights()
 
     def populateNetwork(self):
         for l in xrange(self.numHiddenLayers+2):
@@ -43,6 +45,11 @@ class NeuralNetwork:
         x = instance[0]
         for i, node in enumerate(self.network[0]):
             node.output = x[i]
+
+    def setFirstLayerWeights(self):
+        if self.randomWeights:
+            for node in self.network[1]:
+                node.weights = random.uniform(-0.5, 0.5)
 
     def forwardPropagate(self, instance):
         outputs = []
