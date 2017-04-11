@@ -1,3 +1,5 @@
+See Project Report for theory and implementation details.
+
 This repository contains scripts and data for machine learning project by Sindhuula Selvaraju and Zachary Silver.
 This repository contains 2 directories:
     1. Data : Raw and parsed data files
@@ -7,17 +9,9 @@ Usage:
     parse_data.py : python parse_data.py <input_file> <output_file> <stopword_file>
     assign_feature_weights.py : python assign_feature_weights.py <input_file> <output_file> <words_file>    
 Points to note:
-    1. The preprocessing/parsing of our raw data involves removing frequently occuriing words and phrases and making sure keywords necessary for the classification get a higher weight
+    1. The preprocessing/parsing of our raw data involves removing frequently occuring words and phrases and making sure keywords necessary for the classification get a higher weight
     2. The feature vector is formd similar to the way it waas formed in our homeworks but instead of integer our features are strings
     3. We're still using the model and predict files to keep track of possible points of failure.
-Thinking points:
-    1. Should we also consider synonyms of words for example:
-        The corpse frightened her
-        The body scared her
-       Corpse and body mean the same and scared and frightened mean the same hence we should see if any word in test has a synonym in train then it should get the same weight as the word in train
-    2. We might alo want to use a stemmer and a lemmatizer this is because we should use the root word instead of the word itself for example frighten, frightening and frightened all have the root word as fright. (done)
-    3. The parsed data should not only split the data it shuold also remove unimportant words, assign weights(taking into consideration points 1 and 2) etc. (done)
-    4. A list of sub-genres needs too be made so that the perceptron can interleave over this.
 
     5. Our neural network uses some number of stacked "perceptrons." Each
     perceptron represents its input as a vector and its output as a number.
@@ -26,9 +20,6 @@ Thinking points:
     each of those nodes will be the output of 10 perceptrons that represent
     the previous layers. These outputs will then be the inputs for a final
     perceptron that gives the final output value.
-    Very informative link: http://stackoverflow.com/questions/34229140/choosing-from-different-cost-function-and-activation-function-of-a-neural-networ
-    https://www.youtube.com/watch?v=6RUwfKNdaV0#t=161.907049
-    
 
 
 
